@@ -3,23 +3,20 @@ package com.backend;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 
-import java.io.FileNotFoundException;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class New {
+    static public String[] typeNames = {"news", "sports", "laws", "businesses", "entertainments",
+            "educations", "life", "heath", "world"};
+
     private String title;
     private Date writeDate;
     private String content;
     private String type;
 
     // Constructor
-    public New(String title, String content) {
-        this.title = title;
-        this.content = content;
-        this.type = "uncategorized";
-        this.writeDate = new Date();
-    }
-
     public New(String title, String content, String type) {
         this.title = title;
         this.content = content;
@@ -60,8 +57,8 @@ public class New {
         this.type = type;
     }
 
-    static public String createSampleContent() throws FileNotFoundException {
+    static public String createSampleContent(int min, int max) {
         Lorem lorem = LoremIpsum.getInstance();
-        return "";
+        return lorem.getParagraphs(min, max);
     }
 }
