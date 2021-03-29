@@ -1,20 +1,20 @@
 package com.news;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
+import com.backend.New;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,25 +34,33 @@ public class MainActivity extends AppCompatActivity {
         Map<String, Object> docData = new HashMap<>();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference collRef = db.document("users/testId");
+        DocumentReference docRef = db.document("news/firstNew");
+
+        String content = "";
+        try {
+            content = New.createSampleContent();
+        } catch (FileNotFoundException e) {
+            Toast.makeText(this, "file not found", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+        New paper = new New("test", content);
 
         btnOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docData.put("testId", "one");
-                docData.put("testField", 1);
-                db.collection("users").document("testId").set(docData);
+//                docRef.set(paper);
+                txtHello.setText(paper.getContent());
             }
         });
 
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                collRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document = task.getResult();
-                        txtHello.setText(document.getData().toString());
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        New n = documentSnapshot.toObject(New.class);
+                        txtHello.setText(n.getTitle());
                     }
                 });
             }
