@@ -1,5 +1,7 @@
 package com.backend;
 
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 
 import java.io.FileNotFoundException;
 import java.util.Date;
@@ -59,6 +61,7 @@ public class New {
     }
 
     static public String createSampleContent() throws FileNotFoundException {
+        Lorem lorem = LoremIpsum.getInstance();
         return "";
     }
 }
