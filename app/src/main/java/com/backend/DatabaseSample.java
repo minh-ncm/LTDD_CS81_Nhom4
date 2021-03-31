@@ -39,6 +39,7 @@ public class DatabaseSample {
         Map<String, String> newsPreview = new HashMap<>();
         newsPreview.put("title", sample.getTitle());
         newsPreview.put("author", sample.getAuthorUsername());
+        newsPreview.put("type", sample.getType());
         newsPreview.put("preview", sample.getPreviewContent(150));
         docRef.set(newsPreview);
         docRef.update("created date", sample.getWriteDate());
