@@ -92,6 +92,6 @@ public class News {
         // Second level news database
         Map<String, String> contentFull = new HashMap<>();
         contentFull.put("full", content);
-        docRef.collection("content").document("0").set(content);
+        docRef.collection("content").document("0").set(contentFull);
     }
 }
