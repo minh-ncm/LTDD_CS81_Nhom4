@@ -16,37 +16,46 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class BackendTestActivity extends AppCompatActivity {
-    Button btnOne, btnTwo;
-    TextView txtHello;
+    Button btnRead, btnWrite;
+    TextView txtTitle, txtContent, txtAuthor, txtDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backend_test);
 
-        btnOne = (Button) findViewById(R.id.btnOne);
-        btnTwo = (Button) findViewById(R.id.btnTwo);
-        txtHello = (TextView) findViewById(R.id.textView);
-        txtHello.setMovementMethod(new ScrollingMovementMethod());
+        initLayoutViews();
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.document("news/firstNew");
         String content = News.createSampleContent(4, 5);
-        News paper = new News("test", content, "");
+        News paper = new News("test", content, "uncategorized", "admin");
 
-        btnOne.setOnClickListener(new View.OnClickListener() {
+        btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                docRef.set(paper);
-                txtHello.setText(paper.getPreviewContent(200));
+                txtTitle.setText(paper.getTitle());
+                txtContent.setText(paper.getContent());
+                txtAuthor.setText(paper.getAuthorUsername());
+                txtDate.setText(paper.getWriteDate().toString());
             }
         });
 
-        btnTwo.setOnClickListener(new View.OnClickListener() {
+        btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseSample databaseSample = new DatabaseSample();
                 databaseSample.writeToNewsDatabase(3);
             }
         });
+    }
+
+    public void initLayoutViews(){
+        btnRead = (Button) findViewById(R.id.btnRead);
+        btnWrite = (Button) findViewById(R.id.btnWrite);
+        txtTitle = (TextView) findViewById(R.id.sample_title);
+        txtContent = (TextView) findViewById(R.id.sample_content);
+        txtContent.setMovementMethod(new ScrollingMovementMethod());
+        txtAuthor = (TextView) findViewById(R.id.sample_author);
+        txtDate = (TextView) findViewById(R.id.sample_date);
     }
 }

@@ -18,10 +18,11 @@ public class News {
     private String authorUsername;
 
     // Constructor
-    public News(String title, String content, String type) {
+    public News(String title, String content, String type, String authorUsername) {
         this.title = title;
         this.content = content;
         this.type = type;
+        this.authorUsername = authorUsername;
     }
 
     public News() {
