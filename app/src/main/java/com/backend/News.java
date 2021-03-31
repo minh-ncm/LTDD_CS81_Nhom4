@@ -1,11 +1,15 @@
 package com.backend;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class News {
     static public String[] typeNames = {"news", "sports", "laws", "businesses", "entertainments",
@@ -69,5 +73,25 @@ public class News {
     // Public methods
     public String getPreviewContent(int endIndex){
         return content.substring(0, endIndex);
+    }
+    public void writeNewsToDatabase(){
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        StringBuilder path = new StringBuilder("news/");
+        path.append(authorUsername).append("_").append(title).append("/");
+        database.document(path.toString());
+        DocumentReference docRef = database.document(path.toString());
+
+        Map<String, String> newsPreview = new HashMap<>();
+        newsPreview.put("title", title);
+        newsPreview.put("author", authorUsername);
+        newsPreview.put("type", type);
+        newsPreview.put("preview", getPreviewContent(150));
+        docRef.set(newsPreview);
+        docRef.update("created date", writeDate);
+
+        // Second level news database
+        Map<String, String> contentFull = new HashMap<>();
+        contentFull.put("full", content);
+        docRef.collection("content").document("0").set(content);
     }
 }
