@@ -29,28 +29,24 @@ import com.squareup.picasso.Picasso;
 
         initLayoutViews();
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.document("news/firstNew");
-        String content = News.createSampleContent(4, 5);
-        News paper = new News("test", content, "uncategorized", "admin");
-        paper.setThumbnail("https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_black.png");
+        DatabaseSample databaseSample = new DatabaseSample();
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtTitle.setText(paper.getTitle());
-                txtContent.setText(paper.getContent());
-                txtAuthor.setText(paper.getAuthorUsername());
-                txtDate.setText(paper.getWriteDate().toString());
-                Picasso.get().load(paper.getThumbnailURL()).into(imgThumbnail);
+                News sample = databaseSample.generateSampleNews();
+                txtTitle.setText(sample.getTitle());
+                txtContent.setText(sample.getContent());
+                txtAuthor.setText(sample.getAuthorUsername());
+                txtDate.setText(sample.getWriteDate().toString());
+                Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
             }
         });
 
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseSample databaseSample = new DatabaseSample();
-                databaseSample.writeToNewsDatabase(3);
+                databaseSample.writeToNewsDatabase(1);
             }
         });
     }

@@ -70,7 +70,7 @@ public class News {
     public void setImageURLs(List<String> imageURLs) {
         this.imageURLs = imageURLs;
     }
-    public void setThumbnail(String url) { imageURLs.add(0, url); }
+    public void setThumbnailURL(String url) { imageURLs.add(0, url); }
 
     //
     static public String createSampleContent(int min, int max) {
@@ -89,18 +89,23 @@ public class News {
         database.document(path.toString());
         DocumentReference docRef = database.document(path.toString());
 
-        Map<String, String> newsPreview = new HashMap<>();
-        newsPreview.put("title", title);
-        newsPreview.put("author", authorUsername);
-        newsPreview.put("type", type);
-        newsPreview.put("preview", getPreviewContent(150));
-        docRef.set(newsPreview);
+        Map<String, String> dict = new HashMap<>();
+        dict.put("title", title);
+        dict.put("author", authorUsername);
+        dict.put("type", type);
+        dict.put("preview", getPreviewContent(150));
+        docRef.set(dict);
         docRef.update("created date", writeDate);
 
         // Second level news database
-        Map<String, String> contentFull = new HashMap<>();
-        contentFull.put("full", content);
-        docRef.collection("content").document("0").set(contentFull);
+        dict.clear();
+        dict.put("full", content);
+        docRef.collection("content").document("0").set(dict);
+
+        dict.clear();
+        for(int i = 0; i < imageURLs.size(); i++)
+            dict.put(String.format("%d", i), imageURLs.get(i));
+        docRef.collection("images").document("0").set(dict);
     }
     public void addPicURL(String url){ imageURLs.add(url); }
 }
