@@ -16,10 +16,11 @@ public class News {
             "educations", "life", "heath", "world"};
 
     private String title;
-    private Date writeDate;
+    private final Date writeDate = new Date();
     private String content;
     private String type;
     private String authorUsername;
+    private List<String> imageURLs = new LinkedList<>();
 
     // Constructor
     public News(String title, String content, String type, String authorUsername) {
@@ -48,6 +49,10 @@ public class News {
     public String getAuthorUsername() {
         return authorUsername;
     }
+    public List<String> getImageURLs() {
+        return imageURLs;
+    }
+    public String getThumbnailURL() { return imageURLs.get(0); }
 
     // Setter
     public void setTitle(String title) {
@@ -62,9 +67,12 @@ public class News {
     public void setAuthorUsername(String authorUsername) {
         this.authorUsername = authorUsername;
     }
+    public void setImageURLs(List<String> imageURLs) {
+        this.imageURLs = imageURLs;
+    }
+    public void setThumbnail(String url) { imageURLs.add(0, url); }
 
     //
-    { this.writeDate = new Date(); }
     static public String createSampleContent(int min, int max) {
         Lorem lorem = LoremIpsum.getInstance();
         return lorem.getParagraphs(min, max);
@@ -94,4 +102,5 @@ public class News {
         contentFull.put("full", content);
         docRef.collection("content").document("0").set(contentFull);
     }
+    public void addPicURL(String url){ imageURLs.add(url); }
 }

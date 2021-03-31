@@ -2,8 +2,6 @@
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -19,9 +17,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 
         public class BackendTestActivity extends AppCompatActivity {
     Button btnRead, btnWrite;
@@ -47,7 +42,7 @@ import java.net.URL;
                 txtContent.setText(paper.getContent());
                 txtAuthor.setText(paper.getAuthorUsername());
                 txtDate.setText(paper.getWriteDate().toString());
-                Picasso.get().load(paper.getThumbnail()).into(imgThumbnail);
+                Picasso.get().load(paper.getThumbnailURL()).into(imgThumbnail);
             }
         });
 
