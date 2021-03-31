@@ -2,22 +2,31 @@
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.backend.DatabaseSample;
 import com.backend.News;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
-public class BackendTestActivity extends AppCompatActivity {
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+        public class BackendTestActivity extends AppCompatActivity {
     Button btnRead, btnWrite;
     TextView txtTitle, txtContent, txtAuthor, txtDate;
+    ImageView imgThumbnail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +38,7 @@ public class BackendTestActivity extends AppCompatActivity {
         DocumentReference docRef = db.document("news/firstNew");
         String content = News.createSampleContent(4, 5);
         News paper = new News("test", content, "uncategorized", "admin");
+        paper.setThumbnail("https://firebase.google.com/downloads/brand-guidelines/PNG/logo-built_black.png");
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,6 +47,7 @@ public class BackendTestActivity extends AppCompatActivity {
                 txtContent.setText(paper.getContent());
                 txtAuthor.setText(paper.getAuthorUsername());
                 txtDate.setText(paper.getWriteDate().toString());
+                Picasso.get().load(paper.getThumbnail()).into(imgThumbnail);
             }
         });
 
@@ -57,5 +68,6 @@ public class BackendTestActivity extends AppCompatActivity {
         txtContent.setMovementMethod(new ScrollingMovementMethod());
         txtAuthor = (TextView) findViewById(R.id.sample_author);
         txtDate = (TextView) findViewById(R.id.sample_date);
+        imgThumbnail = (ImageView) findViewById(R.id.backend_thumbnail);
     }
 }
