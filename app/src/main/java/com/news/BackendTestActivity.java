@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.backend.New;
+import com.backend.DatabaseSample;
+import com.backend.News;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -29,27 +30,22 @@ public class BackendTestActivity extends AppCompatActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.document("news/firstNew");
-        String content = New.createSampleContent(4, 5);
-        New paper = new New("test", content, "");
+        String content = News.createSampleContent(4, 5);
+        News paper = new News("test", content, "");
 
         btnOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                docRef.set(paper);
-                txtHello.setText(paper.getContent());
+                txtHello.setText(paper.getPreviewContent(200));
             }
         });
 
         btnTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        New n = documentSnapshot.toObject(New.class);
-                        txtHello.setText(n.getTitle());
-                    }
-                });
+                DatabaseSample databaseSample = new DatabaseSample();
+                databaseSample.writeToNewsDatabase(3);
             }
         });
     }

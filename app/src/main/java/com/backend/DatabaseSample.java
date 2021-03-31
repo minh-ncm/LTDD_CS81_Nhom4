@@ -1,9 +1,14 @@
 package com.backend;
 
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.model.Document;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class DatabaseSample {
@@ -13,33 +18,43 @@ public class DatabaseSample {
         return array[index];
     }
 
-    public New generateSampleNew() {
+    public News generateSampleNews() {
         Lorem lorem = new LoremIpsum();
-        New sample = new New();
-        sample.setTitle(lorem.getWords(5, 10));
-        sample.setContent(lorem.getParagraphs(4, 5));
-        sample.setType(getRandomType(New.typeNames));
+        News sample = new News();
+        sample.setTitle(lorem.getWords(3, 5));
+        sample.setContent(lorem.getParagraphs(5, 6));
+        sample.setType(getRandomType(News.typeNames));
+        sample.setAuthorUsername("admin");
         return sample;
     }
 
-    private void writeToDatabase(int amount, String path){
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        for(int i = 0; i < amount; i++) {
-            Object sample = new Object();
-            if (path.equals("news"))
-                sample = generateSampleNew();
+    private void writeOneNewToDataBase(){
+        StringBuilder path = new StringBuilder("news/");
+        News sample = generateSampleNews();
+        // Preview level news database
+        path.append(sample.getAuthorUsername()).append("_").append(sample.getTitle()).append("/");
+        database.document(path.toString());
+        DocumentReference docRef = database.document(path.toString());
 
-            if (path.equals("users"))
-                return;
-            database.document(path).set(sample);
-        }
+        Map<String, String> newsPreview = new HashMap<>();
+        newsPreview.put("title", sample.getTitle());
+        newsPreview.put("author", sample.getAuthorUsername());
+        newsPreview.put("preview", sample.getPreviewContent(150));
+        docRef.set(newsPreview);
+        docRef.update("created date", sample.getWriteDate());
+
+        // Second level news database
+        Map<String, String> content = new HashMap<>();
+        content.put("full", sample.getContent());
+        docRef.collection("content").document("0").set(content);
     }
 
-    public void witeToNewDatabase(int amount){
-        writeToDatabase(amount, "news");
+    public void writeToNewsDatabase(int amount){
+        for(int i = 1; i <= amount; i++)
+            writeOneNewToDataBase();
     }
 
-    public void witeToUsersDatabase(int amount){
-        writeToDatabase(amount, "users");
+    public void writeToUsersDatabase(int amount){
+
     }
 }

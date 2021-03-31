@@ -22,7 +22,6 @@ public class News {
         this.title = title;
         this.content = content;
         this.type = type;
-        this.writeDate = new Date();
     }
 
     public News() {
@@ -60,6 +59,7 @@ public class News {
     }
 
     //
+    { this.writeDate = new Date(); }
     static public String createSampleContent(int min, int max) {
         Lorem lorem = LoremIpsum.getInstance();
         return lorem.getParagraphs(min, max);
