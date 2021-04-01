@@ -34,11 +34,16 @@ import com.squareup.picasso.Picasso;
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                News.getNewsByType("world", 3);
                 News sample = databaseSample.generateSampleNews();
                 txtTitle.setText(sample.getTitle());
-                txtContent.setText(sample.getContent());
+                StringBuilder contents = new StringBuilder(Integer.toString(sample.getContent().size())).append("\t");
+                contents.append(Integer.toString(sample.getImageURLs().size())).append("\n");
+                for (String content : sample.getContent())
+                    contents.append(content);
+                txtContent.setText(contents);
                 txtAuthor.setText(sample.getAuthorUsername());
-                txtDate.setText(sample.getWriteDate().toString());
+                txtDate.setText(sample.getcreatedDate().toString());
                 Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
             }
         });

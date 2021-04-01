@@ -24,12 +24,13 @@ public class DatabaseSample {
     public News generateSampleNews() {
         Lorem lorem = new LoremIpsum();
         News sample = new News();
-        sample.setTitle(lorem.getWords(3, 5));
-        sample.setContent(lorem.getParagraphs(5, 6));
         sample.setType(getRandomType(News.typeNames));
         sample.setAuthorUsername("admin");
-        Random random = new Random();
-        sample.setThumbnailURL(sampleImages[random.nextInt(sampleImages.length)]);
+        sample.setTitle(lorem.getWords(3, 5));
+        for (int i = 0; i < new Random().nextInt(5) + 1; i++)
+            sample.addContent(lorem.getParagraphs(1, 1));
+        for (int i = 0; i < new Random().nextInt(5) + 1; i++)
+            sample.addImageURL(sampleImages[new Random().nextInt(sampleImages.length)]);
         return sample;
     }
 
