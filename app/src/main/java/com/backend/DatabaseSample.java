@@ -37,7 +37,8 @@ public class DatabaseSample {
     public void writeToNewsDatabase(int amount){
         for(int i = 1; i <= amount; i++){
             News sample = generateSampleNews();
-            sample.writeNewsToDatabase();
+            DatabaseManagement management = new DatabaseManagement();
+            management.writeNewsToDatabase(sample);
         }
     }
 

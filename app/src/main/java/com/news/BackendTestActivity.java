@@ -1,4 +1,4 @@
-        package com.news;
+package com.news;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,14 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.backend.DatabaseManagement;
 import com.backend.DatabaseSample;
 import com.backend.News;
+import com.backend.NewsPreview;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.util.LinkedList;
+import java.util.List;
 
-        public class BackendTestActivity extends AppCompatActivity {
+
+public class BackendTestActivity extends AppCompatActivity {
     Button btnRead, btnWrite;
     TextView txtTitle, txtContent, txtAuthor, txtDate;
     ImageView imgThumbnail;
@@ -29,22 +34,22 @@ import com.squareup.picasso.Picasso;
 
         initLayoutViews();
 
+        DatabaseManagement databaseManagement = new DatabaseManagement();
         DatabaseSample databaseSample = new DatabaseSample();
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                News.getNewsByType("world", 3);
-                News sample = databaseSample.generateSampleNews();
-                txtTitle.setText(sample.getTitle());
-                StringBuilder contents = new StringBuilder(Integer.toString(sample.getContent().size())).append("\t");
-                contents.append(Integer.toString(sample.getImageURLs().size())).append("\n");
-                for (String content : sample.getContent())
-                    contents.append(content);
-                txtContent.setText(contents);
-                txtAuthor.setText(sample.getAuthorUsername());
-                txtDate.setText(sample.getcreatedDate().toString());
-                Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
+               databaseManagement.getLatestPreview(10);
+//                for (NewsPreview sample : previews){
+//                    txtTitle.setText(sample.getTitle());
+//                    txtContent.setText(sample.getPreviewContent());
+//                    txtAuthor.setText(sample.getAuthorUsername());
+//                    txtDate.setText(sample.getCreatedDate().toString());
+//                    Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
+//                    break;
+//                }
+
             }
         });
 
