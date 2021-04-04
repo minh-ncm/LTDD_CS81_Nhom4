@@ -23,11 +23,7 @@ public class DatabaseManagement {
     private final FirebaseFirestore database = FirebaseFirestore.getInstance();
     private final String pathNews = "news";
     private final String pathUsers = "users";
-    private final LinkedList<NewsPreview> previews = new LinkedList<>();
 
-    public LinkedList<NewsPreview> getPreviews() {
-        return previews;
-    }
     public void writeNewsToDatabase(News news){
         String docId = news.getAuthorUsername() + "_" + news.getTitle() + "/";
         DocumentReference docRef = database.collection(pathNews).document(docId);
@@ -56,6 +52,7 @@ public class DatabaseManagement {
         }
     }
 
+    // Retrieve data from database
     /*
     origin from: https://stackoverflow.com/questions/50109885/firestore-how-can-read-data-from-outside-void-oncomplete-methods
     How to use:
@@ -70,15 +67,38 @@ public class DatabaseManagement {
     public interface firestoreCallback {
         void onCallback(List<NewsPreview> list);
     }
-    public void getLatestPreview(firestoreCallback callback, int amount){
+    public void getLatestPreviews(firestoreCallback callback, int amount){
         Query query = database.collection(pathNews).orderBy("createdDate").limit(amount);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()) {
+                    LinkedList<NewsPreview> previews = new LinkedList<>();
                     for(QueryDocumentSnapshot document : task.getResult()) {
                         NewsPreview news = document.toObject(NewsPreview.class);
                         previews.add(news);
+                    }
+                    callback.onCallback(previews);
+                }
+                else {
+                    Log.d("TEST", "Error");
+                }
+            }
+        });
+    }
+    public void getPreviewsByType(firestoreCallback callback, String type, int amount){
+        Query query = database.collection(pathNews).whereEqualTo("type", type)
+                .orderBy("createdDate", Query.Direction.DESCENDING)
+                .limit(amount);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    LinkedList<NewsPreview> previews = new LinkedList<>();
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        NewsPreview news = document.toObject(NewsPreview.class);
+                        previews.add(news);
+                        Log.d("TEST", news.getCreatedDate().toString());
                     }
                     callback.onCallback(previews);
                 }

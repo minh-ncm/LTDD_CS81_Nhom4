@@ -33,14 +33,13 @@ public class BackendTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_backend_test);
 
         initLayoutViews();
-
         DatabaseManagement databaseManagement = new DatabaseManagement();
         DatabaseSample databaseSample = new DatabaseSample();
 
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseManagement.getLatestPreview(new DatabaseManagement.firestoreCallback() {
+                databaseManagement.getPreviewsByType(new DatabaseManagement.firestoreCallback() {
                     @Override
                     public void onCallback(List<NewsPreview> list) {
                         if (list.size() > 0) {
@@ -53,8 +52,11 @@ public class BackendTestActivity extends AppCompatActivity {
                         } else {
                             txtContent.setText(new String("Don't have any results"));
                         }
+//                        for (NewsPreview news : list) {
+//                            Log.d("_OUT", news.getCreatedDate().toString());
+//                        }
                     }
-                }, 10);
+                }, "educations", 10);
             }
         });
 
