@@ -40,16 +40,21 @@ public class BackendTestActivity extends AppCompatActivity {
         btnRead.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               databaseManagement.getLatestPreview(10);
-//                for (NewsPreview sample : previews){
-//                    txtTitle.setText(sample.getTitle());
-//                    txtContent.setText(sample.getPreviewContent());
-//                    txtAuthor.setText(sample.getAuthorUsername());
-//                    txtDate.setText(sample.getCreatedDate().toString());
-//                    Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
-//                    break;
-//                }
-
+                databaseManagement.getLatestPreview(new DatabaseManagement.firestoreCallback() {
+                    @Override
+                    public void onCallback(List<NewsPreview> list) {
+                        if (list.size() > 0) {
+                            NewsPreview sample = list.get(0);
+                            txtTitle.setText(sample.getTitle());
+                            txtContent.setText(sample.getPreviewContent());
+                            txtAuthor.setText(sample.getAuthorUsername());
+                            txtDate.setText(sample.getCreatedDate().toString());
+                            Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
+                        } else {
+                            txtContent.setText(new String("Don't have any results"));
+                        }
+                    }
+                }, 10);
             }
         });
 
@@ -71,4 +76,5 @@ public class BackendTestActivity extends AppCompatActivity {
         txtDate = (TextView) findViewById(R.id.sample_date);
         imgThumbnail = (ImageView) findViewById(R.id.backend_thumbnail);
     }
+
 }

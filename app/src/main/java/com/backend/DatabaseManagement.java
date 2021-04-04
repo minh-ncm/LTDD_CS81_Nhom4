@@ -2,8 +2,17 @@ package com.backend;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -14,6 +23,11 @@ public class DatabaseManagement {
     private final FirebaseFirestore database = FirebaseFirestore.getInstance();
     private final String pathNews = "news";
     private final String pathUsers = "users";
+    private final LinkedList<NewsPreview> previews = new LinkedList<>();
+
+    public LinkedList<NewsPreview> getPreviews() {
+        return previews;
+    }
     public void writeNewsToDatabase(News news){
         String docId = news.getAuthorUsername() + "_" + news.getTitle() + "/";
         DocumentReference docRef = database.collection(pathNews).document(docId);
@@ -41,8 +55,37 @@ public class DatabaseManagement {
             docRef.collection("images").document(Integer.toString(i)).set(dict);
         }
     }
-    public void getLatestPreview(int amount){
-        List<NewsPreview> previews = new LinkedList<>();
-        database.collection(pathNews).whereEqualTo("type", "laws");
+
+    /*
+    origin from: https://stackoverflow.com/questions/50109885/firestore-how-can-read-data-from-outside-void-oncomplete-methods
+    How to use:
+    DatabaseManagement databaseManagement = new DatabaseManagement();
+    databaseManagement.getLatestPreview(new DatabaseManagement.firestoreCallback() {
+                @Override
+                public void onCallback(List<NewsPreview> list) {
+                    // Do processing here
+                }
+            }, amount);
+    */
+    public interface firestoreCallback {
+        void onCallback(List<NewsPreview> list);
+    }
+    public void getLatestPreview(firestoreCallback callback, int amount){
+        Query query = database.collection(pathNews).orderBy("createdDate").limit(amount);
+        query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    for(QueryDocumentSnapshot document : task.getResult()) {
+                        NewsPreview news = document.toObject(NewsPreview.class);
+                        previews.add(news);
+                    }
+                    callback.onCallback(previews);
+                }
+                else {
+                    Log.d("TEST", "Error");
+                }
+            }
+        });
     }
 }
