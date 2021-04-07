@@ -51,8 +51,7 @@ public class DatabaseManagement {
             docRef.collection("images").document(Integer.toString(i)).set(dict);
         }
     }
-    public void writeUserToDatabase() {
-        User user = new User();
+    public void writeUserToDatabase(User user) {
         DocumentReference docRef = database.collection(pathUsers).document(user.getUsername());
 
         Map<String, Object> dict = new HashMap<>();
