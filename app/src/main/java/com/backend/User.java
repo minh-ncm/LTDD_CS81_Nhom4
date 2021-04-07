@@ -3,8 +3,16 @@ package com.backend;
 public class User {
     private String username;
     private String password;
-    private boolean isWriter;
-    private boolean isAdmin;
+    private boolean isWriter = false;
+    private boolean isAdmin = false;
+
+    // Constructor
+
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     // Getter
     public String getUsername() { return username; }
