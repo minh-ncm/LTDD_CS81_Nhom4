@@ -7,12 +7,11 @@ public class User {
     private boolean isAdmin = false;
 
     // Constructor
-
-
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
+    public User(){}
 
     // Getter
     public String getUsername() { return username; }

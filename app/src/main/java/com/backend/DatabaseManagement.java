@@ -51,6 +51,17 @@ public class DatabaseManagement {
             docRef.collection("images").document(Integer.toString(i)).set(dict);
         }
     }
+    public void writeUserToDatabase() {
+        User user = new User();
+        DocumentReference docRef = database.collection(pathUsers).document(user.getUsername());
+
+        Map<String, Object> dict = new HashMap<>();
+        dict.put("username", user.getUsername());
+        dict.put("password", user.getPassword());
+        dict.put("isAdmin", user.isAdmin());
+        dict.put("isWriter", user.isWriter());
+        docRef.set(dict);
+    }
 
     // Retrieve data from database
     /*
