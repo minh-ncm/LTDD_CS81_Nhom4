@@ -15,6 +15,7 @@ import com.backend.DatabaseManagement;
 import com.backend.DatabaseSample;
 import com.backend.News;
 import com.backend.NewsPreview;
+import com.backend.User;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -63,7 +64,9 @@ public class BackendTestActivity extends AppCompatActivity {
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                databaseSample.writeToNewsDatabase(1);
+                User user = new User("test", "1234");
+                databaseManagement.writeUserToDatabase(user);
+//                databaseSample.writeToNewsDatabase(1);
             }
         });
     }
