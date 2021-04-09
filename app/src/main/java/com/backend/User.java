@@ -1,8 +1,8 @@
 package com.backend;
 
 public class User {
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
     private boolean isWriter = false;
     private boolean isAdmin = false;
 

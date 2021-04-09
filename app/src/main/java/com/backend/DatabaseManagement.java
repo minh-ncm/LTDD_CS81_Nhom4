@@ -65,19 +65,21 @@ public class DatabaseManagement {
     // Retrieve data from database
     /*
     origin from: https://stackoverflow.com/questions/50109885/firestore-how-can-read-data-from-outside-void-oncomplete-methods
-    How to use:
-    DatabaseManagement databaseManagement = new DatabaseManagement();
-    databaseManagement.getLatestPreview(new DatabaseManagement.firestoreCallback() {
-                @Override
-                public void onCallback(List<NewsPreview> list) {
-                    // Do processing here
-                }
-            }, amount);
     */
-    public interface firestoreCallback {
+    public interface newsPreviewsCallback {
+        /*
+        Example:
+        DatabaseManagement databaseManagement = new DatabaseManagement();
+        databaseManagement.getLatestPreview(new DatabaseManagement.newsPreviewsCallback() {
+                    @Override
+                    public void onCallback(List<NewsPreview> list) {
+                        // Do processing here
+                    }
+                }, amount);
+        */
         void onCallback(List<NewsPreview> list);
     }
-    public void getLatestPreviews(firestoreCallback callback, int amount){
+    public void getLatestPreviews(newsPreviewsCallback callback, int amount){
         Query query = database.collection(pathNews).orderBy("createdDate").limit(amount);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -96,7 +98,7 @@ public class DatabaseManagement {
             }
         });
     }
-    public void getPreviewsByType(firestoreCallback callback, String type, int amount){
+    public void getPreviewsByType(newsPreviewsCallback callback, String type, int amount){
         Query query = database.collection(pathNews).whereEqualTo("type", type)
                 .orderBy("createdDate", Query.Direction.DESCENDING)
                 .limit(amount);
@@ -115,6 +117,32 @@ public class DatabaseManagement {
                 else {
                     Log.d("TEST", "Error");
                 }
+            }
+        });
+    }
+    public interface userCallback {
+        void onCallback(User user);
+    }
+    public void getUserFromDatabase(userCallback callback, String username, String password) {
+        DocumentReference docRef = database.collection(pathUsers).document(username);
+        User user = new User();
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("_out", "found user");
+                        user.setUsername(document.getString("username"));
+                        user.setPassword(document.getString("password"));
+                        Log.d("_out", document.getId() + "=>" + document.getData().toString());
+                    }
+                    else
+                        Log.d("_out", "not found");
+                    callback.onCallback(user);
+                }
+                else
+                    Log.d("_out", "failed");
             }
         });
     }
