@@ -93,7 +93,7 @@ public class DatabaseManagement {
                     callback.onCallback(previews);
                 }
                 else {
-                    Log.d("TEST", "Error");
+                    Log.d("_out", "Error");
                 }
             }
         });
@@ -110,20 +110,31 @@ public class DatabaseManagement {
                     for(QueryDocumentSnapshot document : task.getResult()) {
                         NewsPreview news = document.toObject(NewsPreview.class);
                         previews.add(news);
-                        Log.d("TEST", news.getCreatedDate().toString());
+                        Log.d("_out", news.getCreatedDate().toString());
                     }
                     callback.onCallback(previews);
                 }
                 else {
-                    Log.d("TEST", "Error");
+                    Log.d("_out", "Error");
                 }
             }
         });
     }
+
     public interface userCallback {
+        /*
+        Example:
+        DatabaseManagement databaseManagement = new DatabaseManagement();
+        databaseManagement.getUserFromDatabase(new DatabaseManagement.userCallback() {
+                    @Override
+                    public void onCallback(User user) {
+                        // Do processing here
+                    }
+        }, username);
+        */
         void onCallback(User user);
     }
-    public void getUserFromDatabase(userCallback callback, String username, String password) {
+    public void getUserFromDatabase(userCallback callback, String username) {
         DocumentReference docRef = database.collection(pathUsers).document(username);
         User user = new User();
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -132,10 +143,9 @@ public class DatabaseManagement {
                 if(task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("_out", "found user");
+                        Log.d("_out", "found");
                         user.setUsername(document.getString("username"));
                         user.setPassword(document.getString("password"));
-                        Log.d("_out", document.getId() + "=>" + document.getData().toString());
                     }
                     else
                         Log.d("_out", "not found");

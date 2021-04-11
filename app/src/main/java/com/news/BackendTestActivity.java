@@ -28,61 +28,16 @@ public class BackendTestActivity extends AppCompatActivity {
     Button btnRead, btnWrite;
     TextView txtTitle, txtContent, txtAuthor, txtDate;
     ImageView imgThumbnail;
+    DatabaseManagement databaseManagement = new DatabaseManagement();
+    DatabaseSample databaseSample = new DatabaseSample();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backend_test);
 
         initLayoutViews();
-        DatabaseManagement databaseManagement = new DatabaseManagement();
-        DatabaseSample databaseSample = new DatabaseSample();
-        StringBuilder builder = new StringBuilder();
 
-        btnRead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                databaseManagement.getPreviewsByType(new DatabaseManagement.newsPreviewsCallback() {
-//                    @Override
-//                    public void onCallback(List<NewsPreview> list) {
-//                        if (list.size() > 0) {
-//                            NewsPreview sample = list.get(0);
-//                            txtTitle.setText(sample.getTitle());
-//                            txtContent.setText(sample.getPreviewContent());
-//                            txtAuthor.setText(sample.getAuthorUsername());
-//                            txtDate.setText(sample.getCreatedDate().toString());
-//                            Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
-//                        } else {
-//                            txtContent.setText(new String("Don't have any results"));
-//                        }
-//                    }
-//                }, "educations", 10);
-
-                databaseManagement.getUserFromDatabase(new DatabaseManagement.userCallback() {
-                    @Override
-                    public void onCallback(User user) {
-                        if(user.getUsername().equals(""))
-                            txtTitle.setText("username not found");
-                        else
-                            if (!user.getPassword().equals("1234"))
-                                txtTitle.setText("wrong password");
-                            else {
-                                builder.append(user.getUsername()).append("\n")
-                                        .append(user.getPassword()).append("\n");
-                                txtContent.setText(builder.toString());
-                            }
-                    }
-                }, "admin", "adfasdf");
-            }
-        });
-
-        btnWrite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                User user = new User("test", "1234");
-                databaseManagement.writeUserToDatabase(user);
-//                databaseSample.writeToNewsDatabase(1);
-            }
-        });
     }
 
     public void initLayoutViews(){
@@ -96,4 +51,50 @@ public class BackendTestActivity extends AppCompatActivity {
         imgThumbnail = (ImageView) findViewById(R.id.backend_thumbnail);
     }
 
+    // Example: User - Database interaction method
+    public void onClickWriteUserToDatabase(View view) {
+        User user = new User("test", "1234");
+        databaseManagement.writeUserToDatabase(user);
+    }
+    public void oncClickReadUserFromDatabase(View view) {
+        String username = "admin";
+        String pwd = "lorem ipsum";
+        StringBuilder builder = new StringBuilder();
+        databaseManagement.getUserFromDatabase(new DatabaseManagement.userCallback() {
+            @Override
+            public void onCallback(User user) {
+                if(user.getUsername().equals(""))
+                    txtTitle.setText("username not found");
+                else if (!user.getPassword().equals(pwd))
+                    txtTitle.setText("wrong password");
+                else {
+                    builder.append(user.getUsername()).append("\n")
+                            .append(user.getPassword()).append("\n");
+                    txtContent.setText(builder.toString());
+                }
+            }
+        }, username);
+    }
+    public void onClickGenerateNewsInDatabase(View view) {
+        databaseSample.writeToNewsDatabase(1);
+    }
+    public void onClickReadPreviewNewsByType(View view) {
+        String type = "educations";
+        databaseManagement.getPreviewsByType(new DatabaseManagement.newsPreviewsCallback() {
+            @Override
+            public void onCallback(List<NewsPreview> list) {
+                if (list.size() > 0) {
+                    NewsPreview sample = list.get(0);
+                    txtTitle.setText(sample.getTitle());
+                    Log.d("_out", "total results: " + list.size());
+                    txtContent.setText(sample.getPreviewContent());
+                    txtAuthor.setText(sample.getAuthorUsername());
+                    txtDate.setText(sample.getCreatedDate().toString());
+                    Picasso.get().load(sample.getThumbnailURL()).into(imgThumbnail);
+                } else {
+                    txtContent.setText(new String("Don't have any results"));
+                }
+            }
+        }, type, 10);
+    }
 }

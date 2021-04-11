@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".BackendTestActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +67,8 @@
             android:layout_height="wrap_content"
             android:text="read"
             android:layout_marginRight="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="oncClickReadUserFromDatabase"/>
 
         <Button
             android:id="@+id/btnWrite"
@@ -75,7 +76,8 @@
             android:layout_height="wrap_content"
             android:text="write"
             android:layout_marginLeft="5dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:onClick="onClickWriteUserToDatabase"/>
     </LinearLayout>
 
 </LinearLayout>
