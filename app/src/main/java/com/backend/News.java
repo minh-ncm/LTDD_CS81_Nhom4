@@ -16,6 +16,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 
+import org.w3c.dom.Document;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;

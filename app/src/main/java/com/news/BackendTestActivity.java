@@ -76,7 +76,7 @@ public class BackendTestActivity extends AppCompatActivity {
         }, username);
     }
     public void onClickGenerateNewsInDatabase(View view) {
-        databaseSample.writeToNewsDatabase(1);
+        databaseSample.writeToNewsDatabase(3);
     }
     public void onClickReadPreviewNewsByType(View view) {
         String type = "educations";
@@ -96,5 +96,20 @@ public class BackendTestActivity extends AppCompatActivity {
                 }
             }
         }, type, 10);
+    }
+    public void onClickGetContents(View view) {
+        String username = "admin";
+        String title = "vocibus dolorem nunc";
+        databaseManagement.getNewsContents(new DatabaseManagement.newsContentsCallback() {
+            @Override
+            public void onCallback(List<String> contents) {
+                StringBuilder builder = new StringBuilder();
+                for(String s : contents) {
+                    Log.d("_out", s);
+                    builder.append(s).append("\n");
+                }
+                txtContent.setText(builder.toString());
+            }
+        }, username, title);
     }
 }

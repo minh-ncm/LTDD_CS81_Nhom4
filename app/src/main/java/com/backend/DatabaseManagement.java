@@ -44,15 +44,17 @@ public class DatabaseManagement {
         dict.clear();
         DocumentReference contentsRef = docRef.collection("contents")
                 .document("contents");
+        dict.put("total", news.getContent().size());
         for (int i = 0; i < news.getContent().size(); i++) {
             dict.put(Integer.toString(i), news.getContent().get(i));
         }
         contentsRef.set(dict);
 
         // Write images to database
+        dict.clear();
         DocumentReference imagesRef = docRef.collection("images")
                 .document("images");
-        dict.clear();
+        dict.put("total", news.getImageURLs().size());
         for(int i = 0; i < news.getImageURLs().size(); i++) {
             dict.put(Integer.toString(i), news.getImageURLs().get(i));
         }
@@ -129,42 +131,29 @@ public class DatabaseManagement {
     public interface newsContentsCallback {
         void onCallback(List<String> contents);
     }
-
-    // TODO:
-    public void getNewsContents(newsContentsCallback callback, String title, String authorUsername){
+    public void getNewsContents(newsContentsCallback callback, String authorUsername, String title){
         String newsId = authorUsername + "#" + title;
-        DocumentReference newsRef = database.document(newsId);
-        Query queryContents = newsRef.collection("contents");
-        Query queryImages = newsRef.collection("images");
-        Task contentsTask = queryContents.get();
-        Task imagesTask = queryImages.get();
-
-        Task combinedTask = Tasks.whenAllComplete(contentsTask, imagesTask)
-                .addOnCompleteListener(new OnCompleteListener<List<Task<?>>>() {
-                    @Override
-                    public void onComplete(@NonNull Task<List<Task<?>>> task) {
-                        task.isSuccessful();
-                        task.getResult();
+        database.collection(pathNews)
+                .document(newsId)
+                .collection("contents")
+                .document("contents")
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    List<String> conents = new LinkedList<>();
+                    DocumentSnapshot document = task.getResult();
+                    int total = document.getLong("total").intValue();
+                    for(int i = 0; i < total; i++) {
+                        conents.add(document.getString(Integer.toString(i)));
                     }
-                });
-
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()) {
-//                    News news = new News();
-//                    for(QueryDocumentSnapshot document : task.getResult()) {
-//                        news.setTitle(document.getString("title"));
-//                        news.setAuthorUsername(document.getString("authorUsername"));
-//                        news.setType(document.getString("type"));
-//                        news.setCreatedDate(document.getTimestamp("createdDate").toDate());
-////                        Log.d("_out", images.get().getResult().getData().toString());
-//                    }
-//                } else Log.d("_out", "Not found!");
-//            }
-//        });
+                    callback.onCallback(conents);
+                }
+                else
+                    Log.d("_out", "Not found");
+            }
+        });
     }
-
     public interface userCallback {
         /*
         Example:
@@ -200,7 +189,7 @@ public class DatabaseManagement {
             }
         });
     }
-    public void changeUserpassword (String username, String pwd){
+    public void changeUserPassword (String username, String pwd){
         DocumentReference docRef = database.collection(pathUsers).document(username);
         docRef.update("password", pwd);
     }

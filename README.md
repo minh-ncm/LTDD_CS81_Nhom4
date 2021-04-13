@@ -9,7 +9,7 @@ Database hosting [firestore](https://firebase.google.com/docs/firestore)<br>
 Load image from url [picasso](https://github.com/square/picasso)<br>
 
 ## icons
-Icons pack from [fontawesome](https://fontawesome.com/)  
+Icons pack from [fontawesome](https://fontawesome.com/)<br>  
 
 ## Database
 Schemaless database i.e: noSQL

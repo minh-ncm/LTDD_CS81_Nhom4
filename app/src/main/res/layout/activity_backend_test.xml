@@ -68,7 +68,7 @@
             android:text="read"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:onClick="oncClickReadUserFromDatabase"/>
+            android:onClick="onClickGetContents"/>
 
         <Button
             android:id="@+id/btnWrite"
@@ -77,7 +77,7 @@
             android:text="write"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:onClick="onClickWriteUserToDatabase"/>
+            android:onClick="onClickGenerateNewsInDatabase"/>
     </LinearLayout>
 
 </LinearLayout>
