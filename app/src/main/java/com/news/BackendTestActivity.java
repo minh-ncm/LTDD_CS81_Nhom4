@@ -60,7 +60,7 @@ public class BackendTestActivity extends AppCompatActivity {
         String username = "admin";
         String pwd = "lorem ipsum";
         StringBuilder builder = new StringBuilder();
-        databaseManagement.getUserFromDatabase(new DatabaseManagement.userCallback() {
+        databaseManagement.getUserData(new DatabaseManagement.userCallback() {
             @Override
             public void onCallback(User user) {
                 if(user.getUsername().equals(""))

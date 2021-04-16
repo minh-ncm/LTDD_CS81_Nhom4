@@ -195,6 +195,18 @@ public class DatabaseManagement {
         docRef.update("password", pwd);
     }
     public void deleteNews(String username, String title) {
-        database.collection(pathNews).document(username + "#" + title).delete();
+         database.collection(pathNews)
+                .whereEqualTo("authorUserName", username)
+                .whereEqualTo("title", title)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult())
+                        database.collection(pathNews).document(document.getId()).delete();
+                } else Log.d("-out", "error when deleting");
+            }
+        });
     }
+
 }
