@@ -105,7 +105,6 @@ public class BackendTestActivity extends AppCompatActivity {
             public void onCallback(List<String> contents) {
                 StringBuilder builder = new StringBuilder();
                 for(String s : contents) {
-                    Log.d("_out", s);
                     builder.append(s).append("\n");
                 }
                 txtContent.setText(builder.toString());

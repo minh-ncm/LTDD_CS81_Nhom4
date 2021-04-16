@@ -154,6 +154,7 @@ public class DatabaseManagement {
             }
         });
     }
+
     public interface userCallback {
         /*
         Example:
@@ -167,7 +168,7 @@ public class DatabaseManagement {
         */
         void onCallback(User user);
     }
-    public void getUserFromDatabase(userCallback callback, String username) {
+    public void getUserData(userCallback callback, String username) {
         DocumentReference docRef = database.collection(pathUsers).document(username);
         User user = new User();
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -192,5 +193,8 @@ public class DatabaseManagement {
     public void changeUserPassword (String username, String pwd){
         DocumentReference docRef = database.collection(pathUsers).document(username);
         docRef.update("password", pwd);
+    }
+    public void deleteNews(String username, String title) {
+        database.collection(pathNews).document(username + "#" + title).delete();
     }
 }
