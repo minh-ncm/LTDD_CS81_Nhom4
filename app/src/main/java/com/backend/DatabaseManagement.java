@@ -5,9 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,8 +26,8 @@ public class DatabaseManagement {
     private final String pathUsers = "users";
 
     public void writeNewsToDatabase(News news){
-        String docId = news.getAuthorUsername() + "#" + news.getTitle() + "/";
-        DocumentReference docRef = database.collection(pathNews).document(docId);
+        DocumentReference docRef = database.collection(pathNews)
+                .document(news.getAuthorUsername() + "#" + news.getTitle());
 
         Map<String, Object> dict = new HashMap<>();
         dict.put("title", news.getTitle());
@@ -190,23 +188,15 @@ public class DatabaseManagement {
             }
         });
     }
+
     public void changeUserPassword (String username, String pwd){
         DocumentReference docRef = database.collection(pathUsers).document(username);
         docRef.update("password", pwd);
     }
     public void deleteNews(String username, String title) {
-         database.collection(pathNews)
-                .whereEqualTo("authorUserName", username)
-                .whereEqualTo("title", title)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult())
-                        database.collection(pathNews).document(document.getId()).delete();
-                } else Log.d("-out", "error when deleting");
-            }
-        });
+        DocumentReference docRef = database.collection(pathNews).document(username + "#" + title);
+        docRef.collection("contents").document("contents").delete();
+        docRef.collection("images").document("images").delete();
+        docRef.delete();
     }
-
 }

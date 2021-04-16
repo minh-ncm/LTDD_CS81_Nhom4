@@ -99,7 +99,7 @@ public class BackendTestActivity extends AppCompatActivity {
     }
     public void onClickGetContents(View view) {
         String username = "admin";
-        String title = "vocibus dolorem nunc";
+        String title = "efficiantur fabulas qui";
         databaseManagement.getNewsContents(new DatabaseManagement.newsContentsCallback() {
             @Override
             public void onCallback(List<String> contents) {
@@ -110,5 +110,8 @@ public class BackendTestActivity extends AppCompatActivity {
                 txtContent.setText(builder.toString());
             }
         }, username, title);
+    }
+    public void onClickDeleteNews(View view) {
+        databaseManagement.deleteNews("admin", "efficiantur fabulas qui");
     }
 }
