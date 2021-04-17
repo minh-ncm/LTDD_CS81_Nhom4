@@ -71,7 +71,7 @@ public class DatabaseManagement {
 
 //    Retrieve data from database
 //    origin from: https://stackoverflow.com/questions/50109885/firestore-how-can-read-data-from-outside-void-oncomplete-methods
-    public interface newsPreviewsCallback {
+    public interface newsListPreviewsCallback {
         /*
         Example:
         DatabaseManagement databaseManagement = new DatabaseManagement();
@@ -84,7 +84,7 @@ public class DatabaseManagement {
         */
         void onCallback(List<NewsPreview> list);
     }
-    public void getLatestPreviews(newsPreviewsCallback callback, int amount){
+    public void getLatestPreviews(newsListPreviewsCallback callback, int amount){
         Query query = database.collection(pathNews).orderBy("createdDate").limit(amount);
         query.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -103,7 +103,7 @@ public class DatabaseManagement {
             }
         });
     }
-    public void getPreviewsByType(newsPreviewsCallback callback, String type, int amount){
+    public void getPreviewsByType(newsListPreviewsCallback callback, String type, int amount){
         Query query = database.collection(pathNews).whereEqualTo("type", type)
                 .orderBy("createdDate", Query.Direction.DESCENDING)
                 .limit(amount);
@@ -126,6 +126,26 @@ public class DatabaseManagement {
         });
     }
 
+    public interface newsPreviewCallback{
+        void onCallback(NewsPreview news);
+    }
+    public void getSpecificNewsPreview(newsPreviewCallback callback, String author, String title) {
+        String docID = author + "#" + title;
+        database.collection(pathNews)
+                .document(docID)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    NewsPreview news = doc.toObject(NewsPreview.class);
+                    callback.onCallback(news);
+                } else
+                    Log.d("_out", "error when getting news");
+            }
+        });
+    }
+
     public interface newsContentsCallback {
         void onCallback(List<String> contents);
     }
@@ -139,16 +159,16 @@ public class DatabaseManagement {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()) {
-                    List<String> conents = new LinkedList<>();
+                    List<String> contents = new LinkedList<>();
                     DocumentSnapshot document = task.getResult();
                     int total = document.getLong("total").intValue();
                     for(int i = 0; i < total; i++) {
-                        conents.add(document.getString(Integer.toString(i)));
+                        contents.add(document.getString(Integer.toString(i)));
                     }
-                    callback.onCallback(conents);
+                    callback.onCallback(contents);
                 }
                 else
-                    Log.d("_out", "Not found");
+                    Log.d("_out", "error when get contents");
             }
         });
     }
