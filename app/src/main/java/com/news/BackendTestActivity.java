@@ -2,6 +2,7 @@ package com.news;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -80,7 +81,7 @@ public class BackendTestActivity extends AppCompatActivity {
     }
     public void onClickReadPreviewNewsByType(View view) {
         String type = "educations";
-        databaseManagement.getPreviewsByType(new DatabaseManagement.newsPreviewsCallback() {
+        databaseManagement.getPreviewsByType(new DatabaseManagement.newsListPreviewsCallback() {
             @Override
             public void onCallback(List<NewsPreview> list) {
                 if (list.size() > 0) {
@@ -113,5 +114,8 @@ public class BackendTestActivity extends AppCompatActivity {
     }
     public void onClickDeleteNews(View view) {
         databaseManagement.deleteNews("admin", "efficiantur fabulas qui");
+    }
+    public void onClickGetFullNews(View view) {
+        startActivity(new Intent(this, SpecificNewsActivity.class));
     }
 }
