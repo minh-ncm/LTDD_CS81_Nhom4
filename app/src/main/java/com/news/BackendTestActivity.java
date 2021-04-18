@@ -36,9 +36,7 @@ public class BackendTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_backend_test);
-
         initLayoutViews();
-
     }
 
     public void initLayoutViews(){
@@ -116,6 +114,12 @@ public class BackendTestActivity extends AppCompatActivity {
         databaseManagement.deleteNews("admin", "efficiantur fabulas qui");
     }
     public void onClickGetFullNews(View view) {
-        startActivity(new Intent(this, SpecificNewsActivity.class));
+        String username = "admin";
+        String title = "delectus reformidans eleifend error patrioque litora iaculis";
+        Intent intent = new Intent(this, SpecificNewsActivity.class);
+        intent.putExtra("authorUsername", username);
+        intent.putExtra("title", title);
+
+        startActivity(intent);
     }
 }

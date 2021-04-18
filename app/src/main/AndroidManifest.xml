@@ -11,7 +11,10 @@
         android:roundIcon="@drawable/ic_newspaper_solid"
         android:supportsRtl="true"
         android:theme="@style/Theme.News">
-        <activity android:name=".SpecificNewsActivity"></activity>
+        <activity
+            android:name=".SpecificNewsActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        </activity>
         <activity android:name=".BackendTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

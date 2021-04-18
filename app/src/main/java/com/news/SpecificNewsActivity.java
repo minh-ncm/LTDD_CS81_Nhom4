@@ -13,7 +13,7 @@ import java.util.List;
 public class SpecificNewsActivity extends AppCompatActivity {
     private final DatabaseManagement databaseManagement = new DatabaseManagement();
 
-    private TextView tvContents, tvType, tvTitle, tvCreatedDate;
+    private TextView tvContents, tvType, tvTitle, tvCreatedDate, tvAuthor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,10 @@ public class SpecificNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_specific_news);
 
         init();
-        loadPreview();
-        loadNewsPreview("admin", "vocibus dolorem nunc");
+        String username = getIntent().getStringExtra("authorUsername");
+        String title = getIntent().getStringExtra("title");
+        loadNewsPreview(username, title);
+        loadContents(username, title);
     }
 
     void init() {
@@ -30,11 +32,10 @@ public class SpecificNewsActivity extends AppCompatActivity {
         tvTitle = findViewById(R.id.full_news_title);
         tvContents = findViewById(R.id.full_news_contents);
         tvCreatedDate = findViewById(R.id.full_news_created_date);
+        tvAuthor = findViewById(R.id.full_news_author);
     }
 
-    void loadPreview() {
-        String username = "admin";
-        String title = "reque veniam saepe";
+    void loadContents(String author, String title) {
         databaseManagement.getNewsContents(new DatabaseManagement.newsContentsCallback() {
             @Override
             public void onCallback(List<String> contents) {
@@ -44,7 +45,7 @@ public class SpecificNewsActivity extends AppCompatActivity {
                 }
                 tvContents.setText(builder.toString());
             }
-        }, username, title);
+        }, author, title);
     }
     void loadNewsPreview(String author, String title) {
         databaseManagement.getSpecificNewsPreview(new DatabaseManagement.newsPreviewCallback() {
@@ -53,6 +54,7 @@ public class SpecificNewsActivity extends AppCompatActivity {
                 tvTitle.setText(news.getTitle());
                 tvType.setText(news.getType());
                 tvCreatedDate.setText(news.getCreatedDate().toString());
+                tvAuthor.setText(news.getAuthorUsername());
             }
         }, author, title);
     }
