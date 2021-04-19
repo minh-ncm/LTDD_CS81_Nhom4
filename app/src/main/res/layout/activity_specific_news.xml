@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpecificNewsActivity"
+    tools:context=".FullNewsActivity"
     android:background="@color/dutch_white">
 
     <ScrollView
@@ -17,36 +17,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_specific_news"
+            android:padding="@dimen/padding_full_news"
             android:scrollbars="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/full_news_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="5dp"
+                    android:textColor="@color/sunset_orange"
+                    android:textSize="@dimen/text_size_regular_info" />
 
-                    <TextView
-                        android:id="@+id/full_news_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="type"
-                        android:textColor="@color/news_type"
-                        android:textSize="@dimen/text_size_full_news_info" />
-
-                    <TextView
-                        android:id="@+id/full_news_created_date"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans"
-                        android:text="time"
-                        android:textSize="@dimen/text_size_full_news_info"/>
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/full_news_created_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:textSize="@dimen/text_size_regular_info"/>
             </LinearLayout>
 
             <LinearLayout
@@ -58,27 +51,31 @@
                     android:id="@+id/full_news_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_top_full_news_title"
                     android:fontFamily="@font/open_sans_bold"
-                    android:text="title"
-                    android:textSize="@dimen/text_size_full_news_title"
+                    android:textSize="@dimen/text_size_regular_title"
                     android:textColor="@color/eerie_black"/>
 
-                <TextView
+                <ImageView
+                    android:id="@+id/full_news_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/margin_vertical_full_news_thumbnail"/>
+
+                <LinearLayout
                     android:id="@+id/full_news_contents"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans"
-                    android:text="contents"
-                    android:textSize="@dimen/text_size_full_news_contents"
-                    android:textColor="@color/eerie_black"/>
+                    android:orientation="vertical">
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/full_news_author"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans_semibold"
-                    android:text="author"
-                    android:textSize="@dimen/text_size_full_news_author"
+                    android:textSize="@dimen/text_size_regular_author"
                     android:textAlignment="textEnd"/>
             </LinearLayout>
 
@@ -91,5 +88,5 @@
         </LinearLayout>
     </ScrollView>
 
-    <include layout="@layout/full_news_toolbar" />
+    <include layout="@layout/toolbar" />
 </RelativeLayout>

@@ -10,18 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.backend.DatabaseManagement;
 import com.backend.DatabaseSample;
-import com.backend.News;
 import com.backend.NewsPreview;
 import com.backend.User;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.util.LinkedList;
 import java.util.List;
 
 
@@ -116,7 +111,7 @@ public class BackendTestActivity extends AppCompatActivity {
     public void onClickGetFullNews(View view) {
         String username = "admin";
         String title = "delectus reformidans eleifend error patrioque litora iaculis";
-        Intent intent = new Intent(this, SpecificNewsActivity.class);
+        Intent intent = new Intent(this, FullNewsActivity.class);
         intent.putExtra("authorUsername", username);
         intent.putExtra("title", title);
 

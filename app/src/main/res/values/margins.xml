@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_toolbar_icon_vertical">10dp</dimen>
+    <dimen name="margin_top_full_news_title">10dp</dimen>
+    <dimen name="margin_vertical_full_news_thumbnail">20dp</dimen>
+    <dimen name="margin_bottom_paragraph">15dp</dimen>
 </resources>

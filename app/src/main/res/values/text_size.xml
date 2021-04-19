@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_size_full_news_info">14sp</dimen>
-    <dimen name="text_size_full_news_title">28sp</dimen>
-    <dimen name="text_size_full_news_contents">16sp</dimen>
-    <dimen name="text_size_full_news_author">18sp</dimen>
+    <dimen name="text_size_regular_info">14sp</dimen>
+    <dimen name="text_size_regular_title">28sp</dimen>
+    <dimen name="text_size_regular_contents">16sp</dimen>
+    <dimen name="text_size_regular_author">18sp</dimen>
 </resources>
