@@ -38,7 +38,8 @@
                     android:layout_width="@dimen/toolbar_icon_width"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/margin_toolbar_icon_vertical"
-                    android:src="@drawable/outline_format_size_white_36"/>
+                    android:src="@drawable/outline_format_size_white_36"
+                    android:onClick="onClickPopupSizeOptions"/>
 
                 <ImageView
                     android:id="@+id/action_comment"

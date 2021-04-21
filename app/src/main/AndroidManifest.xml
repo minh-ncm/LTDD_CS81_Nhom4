@@ -13,7 +13,7 @@
         android:theme="@style/Theme.News">
         <activity
             android:name=".FullNewsActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".BackendTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

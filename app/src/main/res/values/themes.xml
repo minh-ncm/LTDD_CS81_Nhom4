@@ -17,4 +17,9 @@
     <style name="theme_toolbar">
         <item name="android:background">@color/eerie_black</item>
     </style>
+
+    <style name="theme_popup" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 </resources>

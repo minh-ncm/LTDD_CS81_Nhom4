@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="text_size_extra_small_info">7sp</dimen>
+    <dimen name="text_size_extra_small_title">14sp</dimen>
+    <dimen name="text_size_extra_small_contents">8sp</dimen>
+    <dimen name="text_size_extra_small_author">9sp</dimen>
+
+    <dimen name="text_size_small_info">11sp</dimen>
+    <dimen name="text_size_small_title">22sp</dimen>
+    <dimen name="text_size_small_contents">13sp</dimen>
+    <dimen name="text_size_small_author">14sp</dimen>
+
     <dimen name="text_size_regular_info">14sp</dimen>
     <dimen name="text_size_regular_title">28sp</dimen>
     <dimen name="text_size_regular_contents">16sp</dimen>
     <dimen name="text_size_regular_author">18sp</dimen>
+
+    <dimen name="text_size_large_info">21sp</dimen>
+    <dimen name="text_size_large_title">42sp</dimen>
+    <dimen name="text_size_large_contents">24sp</dimen>
+    <dimen name="text_size_large_author">27sp</dimen>
+
+    <dimen name="text_size_extra_large_info">28sp</dimen>
+    <dimen name="text_size_extra_large_title">56sp</dimen>
+    <dimen name="text_size_extra_large_contents">32sp</dimen>
+    <dimen name="text_size_extra_large_author">36sp</dimen>
 </resources>

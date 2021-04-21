@@ -1,22 +1,31 @@
 package com.news;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.backend.DatabaseManagement;
 import com.backend.NewsPreview;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.TypeVariable;
 import java.util.List;
 
 public class FullNewsActivity extends AppCompatActivity {
@@ -98,8 +107,102 @@ public class FullNewsActivity extends AppCompatActivity {
             }
         }, author, title);
     }
-
     public void onClickBack(View view) {
         startActivity(new Intent(FullNewsActivity.this, BackendTestActivity.class));
+    }
+    public void onClickPopupSizeOptions(View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.text_size_popup, null);
+        View v = findViewById(R.id.text_size_window);
+
+        int width = (int) (displayMetrics.widthPixels * 0.6);
+        int height = (int) (displayMetrics.heightPixels * 0.05);
+
+        PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+        popupWindow.showAsDropDown(view);
+    }
+    public void onClickChangeTextExtraSmall(View view) {
+//        view.setBackgroundColor(Color.parseColor("#868277"));
+        tvType.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_small_info));
+        tvCreatedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_small_info));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_small_title));
+        for (int i = 0; i < llContents.getChildCount(); i ++) {
+            TextView textView = (TextView) llContents.getChildAt(i);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.text_size_extra_small_contents));
+        }
+        tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_small_author));
+    }
+    public void onClickChangeTextSmall(View view) {
+//        view.setBackgroundColor(Color.parseColor("#868277"));
+        tvType.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_small_info));
+        tvCreatedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_small_info));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_small_title));
+        for (int i = 0; i < llContents.getChildCount(); i ++) {
+            TextView textView = (TextView) llContents.getChildAt(i);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.text_size_small_contents));
+        }
+        tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_small_author));
+    }
+    public void onClickChangeTextRegular(View view) {
+//        view.setBackgroundColor(Color.parseColor("#868277"));
+        tvType.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_regular_info));
+        tvCreatedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_regular_info));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_regular_title));
+        for (int i = 0; i < llContents.getChildCount(); i ++) {
+            TextView textView = (TextView) llContents.getChildAt(i);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.text_size_regular_contents));
+        }
+        tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_regular_author));
+    }
+    public void onClickChangeTextLarge(View view) {
+//        view.setBackgroundColor(Color.parseColor("#868277"));
+        tvType.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_large_info));
+        tvCreatedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_large_info));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_large_title));
+        for (int i = 0; i < llContents.getChildCount(); i ++) {
+            TextView textView = (TextView) llContents.getChildAt(i);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.text_size_large_contents));
+        }
+        tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_large_author));
+    }
+    public void onClickChangeTextExtraLarge(View view) {
+//        view.setBackgroundColor(Color.parseColor("#868277"));
+        tvType.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_large_info));
+        tvCreatedDate.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_large_info));
+        tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_large_title));
+        for (int i = 0; i < llContents.getChildCount(); i ++) {
+            TextView textView = (TextView) llContents.getChildAt(i);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                    getResources().getDimension(R.dimen.text_size_extra_large_contents));
+        }
+        tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
+                getResources().getDimension(R.dimen.text_size_extra_large_author));
     }
 }
