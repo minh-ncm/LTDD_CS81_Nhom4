@@ -25,6 +25,8 @@ import com.backend.DatabaseManagement;
 import com.backend.NewsPreview;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.TypeVariable;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class FullNewsActivity extends AppCompatActivity {
 
     private TextView tvType, tvTitle, tvCreatedDate, tvAuthor;
     private ImageView ivThumbnail;
-    private LinearLayout llContents;
+    private LinearLayout llContents, llRecommends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class FullNewsActivity extends AppCompatActivity {
         tvAuthor = findViewById(R.id.full_news_author);
         ivThumbnail = findViewById(R.id.full_news_thumbnail);
         llContents = findViewById(R.id.full_news_contents);
+        llRecommends = findViewById(R.id.full_news_recommend);
     }
 
     TextView applyParagraphTheme() {
@@ -104,6 +107,7 @@ public class FullNewsActivity extends AppCompatActivity {
                 Picasso.get().load(news.getThumbnailURL())
                         .resize(ivThumbnail.getWidth(), 0)
                         .into(ivThumbnail);
+                loadRecommendNewsPreview(news.getType(), 5);
             }
         }, author, title);
     }
@@ -204,5 +208,28 @@ public class FullNewsActivity extends AppCompatActivity {
         }
         tvAuthor.setTextSize(TypedValue.COMPLEX_UNIT_PX,
                 getResources().getDimension(R.dimen.text_size_extra_large_author));
+    }
+    public void loadRecommendNewsPreview(String type, int amount) {
+        databaseManagement.getPreviewsByType(new DatabaseManagement.newsListPreviewsCallback() {
+            @Override
+            public void onCallback(List<NewsPreview> list) {
+                for (NewsPreview preview : list) {
+                    if (!preview.getTitle().contentEquals(tvTitle.getText())) {
+                        LayoutInflater inflater = LayoutInflater.from(FullNewsActivity.this);
+                        LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.news_previews, llRecommends, false);
+
+                        TextView previewTitle = (TextView) layout.getChildAt(0);
+                        previewTitle.setText(preview.getTitle());
+                        TextView previewsContents = (TextView) layout.getChildAt(1);
+                        String text = preview.getPreviewContent();
+                        int maxLength = 300;
+                        if (text.length() > maxLength)
+                            text = text.substring(0, maxLength).concat("...");
+                        previewsContents.setText("\t\t" + text);
+                        llRecommends.addView(layout);
+                    }
+                }
+            }
+        }, type, amount);
     }
 }

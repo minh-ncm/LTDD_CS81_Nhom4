@@ -79,7 +79,18 @@
                     android:textAlignment="textEnd"/>
             </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="25dp"
+                android:fontFamily="@font/open_sans"
+                android:textSize="@dimen/text_size_regular_title"
+                android:textColor="@color/sunset_orange"
+                android:gravity="center"
+                android:text="News with same categories"/>
+
             <LinearLayout
+                android:id="@+id/full_news_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

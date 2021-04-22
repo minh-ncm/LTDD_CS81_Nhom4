@@ -24,4 +24,7 @@
     <dimen name="text_size_extra_large_title">56sp</dimen>
     <dimen name="text_size_extra_large_contents">32sp</dimen>
     <dimen name="text_size_extra_large_author">36sp</dimen>
+
+    <dimen name="text_size_preview_title">20sp</dimen>
+    <dimen name="text_size_preview_content">14sp</dimen>
 </resources>

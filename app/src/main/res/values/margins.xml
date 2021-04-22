@@ -4,4 +4,6 @@
     <dimen name="margin_top_full_news_title">10dp</dimen>
     <dimen name="margin_vertical_full_news_thumbnail">20dp</dimen>
     <dimen name="margin_bottom_paragraph">15dp</dimen>
+    <dimen name="margin_bottom_previews">15dp</dimen>
+    <dimen name="margin_bottom_previews_title">10dp</dimen>
 </resources>

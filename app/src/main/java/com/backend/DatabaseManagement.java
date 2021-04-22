@@ -115,7 +115,6 @@ public class DatabaseManagement {
                     for(QueryDocumentSnapshot document : task.getResult()) {
                         NewsPreview news = document.toObject(NewsPreview.class);
                         previews.add(news);
-                        Log.d("_out", news.getCreatedDate().toString());
                     }
                     callback.onCallback(previews);
                 }
