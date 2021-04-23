@@ -28,7 +28,7 @@ import io.perfmark.Link;
 
 public class News {
     static public String[] typeNames = {"news", "sports", "laws", "businesses", "entertainments",
-            "educations", "life", "heath", "world"};
+            "educations", "life", "health", "world"};
 
     protected String title;
     protected Date createdDate = new Date();

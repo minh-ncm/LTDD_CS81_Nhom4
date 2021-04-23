@@ -218,14 +218,25 @@ public class FullNewsActivity extends AppCompatActivity {
                         LayoutInflater inflater = LayoutInflater.from(FullNewsActivity.this);
                         LinearLayout layout = (LinearLayout) inflater.inflate(R.layout.news_previews, llRecommends, false);
 
-                        TextView previewTitle = (TextView) layout.getChildAt(0);
+                        TextView previewTitle = (TextView) layout.getChildAt(1);
                         previewTitle.setText(preview.getTitle());
-                        TextView previewsContents = (TextView) layout.getChildAt(1);
+
+                        TextView previewsContents = (TextView) layout.getChildAt(2);
                         String text = preview.getPreviewContent();
                         int maxLength = 300;
                         if (text.length() > maxLength)
                             text = text.substring(0, maxLength).concat("...");
                         previewsContents.setText("\t\t" + text);
+
+                        layout.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(FullNewsActivity.this, FullNewsActivity.class);
+                                intent.putExtra("title", preview.getTitle());
+                                intent.putExtra("authorUsername", preview.getAuthorUsername());
+                                startActivity(intent);
+                            }
+                        });
                         llRecommends.addView(layout);
                     }
                 }
