@@ -6,4 +6,5 @@
     <dimen name="margin_bottom_paragraph">15dp</dimen>
     <dimen name="margin_vertical_previews_linebreak">15dp</dimen>
     <dimen name="margin_bottom_previews_title">10dp</dimen>
+    <dimen name="margin_horizontal_vote">7dp</dimen>
 </resources>

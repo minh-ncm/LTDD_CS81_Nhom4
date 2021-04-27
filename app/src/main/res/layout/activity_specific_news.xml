@@ -10,6 +10,7 @@
     android:background="@color/dutch_white">
 
     <ScrollView
+        android:id="@+id/full_news_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/height_toolbar">
@@ -87,6 +88,38 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/full_news_comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_full_news"
+                android:background="@color/wheat">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="25dp"
+                    android:layout_marginTop="@dimen/margin_vertical_previews_linebreak"
+                    android:fontFamily="@font/open_sans"
+                    android:textSize="@dimen/text_size_regular_title"
+                    android:textColor="@color/sunset_orange"
+                    android:gravity="center"
+                    android:text="Opinions" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:paddingHorizontal="7dp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="share your thought"
+                    android:textSize="@dimen/text_size_extra_small_contents"
+                    android:textColor="@color/wheat"
+                    android:background="@drawable/button_rounded"
+                    android:onClick="onClickWriteComment"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/full_news_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="25dp"
+                    android:layout_marginTop="@dimen/margin_vertical_previews_linebreak"
                     android:fontFamily="@font/open_sans"
                     android:textSize="@dimen/text_size_regular_title"
                     android:textColor="@color/sunset_orange"

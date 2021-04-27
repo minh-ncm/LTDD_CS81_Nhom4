@@ -24,6 +24,7 @@ public class DatabaseManagement {
     private final FirebaseFirestore database = FirebaseFirestore.getInstance();
     private final String pathNews = "news";
     private final String pathUsers = "users";
+    private final String pathComments = "comments";
 
     public void writeNewsToDatabase(News news){
         DocumentReference docRef = database.collection(pathNews)
@@ -67,6 +68,9 @@ public class DatabaseManagement {
         dict.put("isAdmin", user.isAdmin());
         dict.put("isWriter", user.isWriter());
         docRef.set(dict);
+    }
+    public void writeCommentToDatabase(Comment comments) {
+        database.collection(pathComments).document().set(comments);
     }
 
 //    Retrieve data from database
@@ -208,14 +212,49 @@ public class DatabaseManagement {
         });
     }
 
+    public interface commentsListCallback {
+        void onCallback(List<Comment> comments);
+    }
+    public void getCommentsOfNews(commentsListCallback callback, String authorUsername, String title) {
+        CollectionReference collection = database.collection(pathComments);
+        collection
+                .whereEqualTo("title", title)
+                .whereEqualTo("authorUsername", authorUsername)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Comment> list = new LinkedList<>();
+                    for (QueryDocumentSnapshot document :  task.getResult()) {
+                        Comment comment = document.toObject(Comment.class);
+                        list.add(comment);
+                    }
+                    callback.onCallback(list);
+                }
+            }
+        });
+    }
+
     public void changeUserPassword (String username, String pwd){
         DocumentReference docRef = database.collection(pathUsers).document(username);
         docRef.update("password", pwd);
     }
     public void deleteNews(String username, String title) {
         DocumentReference docRef = database.collection(pathNews).document(username + "#" + title);
-        docRef.collection("contents").document("contents").delete();
-        docRef.collection("images").document("images").delete();
-        docRef.delete();
+        CollectionReference collection = database.collection(pathNews);
+        collection
+                .whereEqualTo("authorUsername", username)
+                .whereEqualTo("title", title)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    DocumentReference docRef = collection.document(document.getId());
+                    docRef.collection("contents").document("contents").delete();
+                    docRef.collection("images").document("images").delete();
+                    docRef.delete();
+                }
+            }
+        });
     }
 }

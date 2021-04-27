@@ -106,7 +106,7 @@ public class BackendTestActivity extends AppCompatActivity {
         }, username, title);
     }
     public void onClickDeleteNews(View view) {
-        databaseManagement.deleteNews("admin", "efficiantur fabulas qui");
+        databaseManagement.deleteNews("admin", "habitasse posuere iudicabit numquam viris ancillae tale");
     }
     public void onClickGetFullNews(View view) {
         String username = "admin";
@@ -114,7 +114,6 @@ public class BackendTestActivity extends AppCompatActivity {
         Intent intent = new Intent(this, FullNewsActivity.class);
         intent.putExtra("authorUsername", username);
         intent.putExtra("title", title);
-
         startActivity(intent);
     }
 }

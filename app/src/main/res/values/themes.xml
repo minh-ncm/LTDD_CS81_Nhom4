@@ -2,9 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.News" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/nandor</item>
+        <item name="colorPrimaryVariant">@color/eerie_black</item>
+        <item name="colorOnPrimary">@color/wheat</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -16,10 +16,5 @@
 
     <style name="theme_toolbar">
         <item name="android:background">@color/eerie_black</item>
-    </style>
-
-    <style name="theme_popup" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowCloseOnTouchOutside">true</item>
     </style>
 </resources>

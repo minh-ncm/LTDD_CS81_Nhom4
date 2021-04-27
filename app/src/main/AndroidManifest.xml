@@ -11,6 +11,7 @@
         android:roundIcon="@drawable/ic_newspaper_solid"
         android:supportsRtl="true"
         android:theme="@style/Theme.News">
+        <activity android:name=".WriteCommentActivity"></activity>
         <activity
             android:name=".FullNewsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
