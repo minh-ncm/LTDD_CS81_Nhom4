@@ -26,16 +26,18 @@ public class WriteCommentActivity extends AppCompatActivity {
         // TODO: get logged in username
         String username = "admin";
         String text = tvComment.getText().toString().trim();
+        
+        if(!text.equals("")) {
+            Comment comment = new Comment(username, text, authorUsername, title);
+            DatabaseManagement databaseManagement = new DatabaseManagement();
 
-        Comment comment = new Comment(username, text, authorUsername, title);
-        DatabaseManagement databaseManagement = new DatabaseManagement();
+            databaseManagement.writeCommentToDatabase(comment);
 
-        databaseManagement.writeCommentToDatabase(comment);
-
-        // Go back to article after post comment
-        Intent intent = new Intent(WriteCommentActivity.this, FullNewsActivity.class);
-        intent.putExtra("title", title);
-        intent.putExtra("authorUsername", authorUsername);
-        startActivity(intent);
+            // Go back to article after post comment
+            Intent intent = new Intent(WriteCommentActivity.this, FullNewsActivity.class);
+            intent.putExtra("title", title);
+            intent.putExtra("authorUsername", authorUsername);
+            startActivity(intent);
+        }
     }
 }
