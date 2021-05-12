@@ -11,7 +11,6 @@
         android:roundIcon="@drawable/ic_newspaper_solid"
         android:supportsRtl="true"
         android:theme="@style/Theme.News">
-        <activity android:name=".WriteCommentActivity"></activity>
         <activity
             android:name=".FullNewsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -22,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
 
         <meta-data
