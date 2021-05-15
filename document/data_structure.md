@@ -34,7 +34,7 @@ Below attributes is for future enhancement.
 - thumbnailURL: url of thumbnail.
 
 ## collections:
-Purpose of these collections is reduce data usage to when don't need to view full article.
-contents: list of paragraphs, split from article contents.
-Furthermore, it help for future features, which is allow add image between 2 paragraphs.
-images: list of image's url in article.
+Purpose of these collections is reduce data usage to when don't need to view full article.  
+contents: list of paragraphs, split from article contents.  
+Furthermore, it help for future features, which is allow add image between 2 paragraphs.  
+images: list of image's url in article.  
