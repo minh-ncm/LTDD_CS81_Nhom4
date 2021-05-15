@@ -275,7 +275,6 @@ public class FullNewsActivity extends AppCompatActivity {
     public void onClickGoToCommentsSection(View view) {
         final int duration = 500;
         ScrollView scrollView = findViewById(R.id.full_news_scrollview);
-//        scrollView.smoothScrollTo(0, commentsSection.getTop());
         ObjectAnimator.ofInt(scrollView, "scrollY",  commentsSection.getTop())
                 .setDuration(duration)
                 .start();
