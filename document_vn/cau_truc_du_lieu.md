@@ -34,7 +34,7 @@ root
 - thumbnailURL: link chứa ảnh được dùng để làm trang bìa
 
 ### tập hợp:
-Việc có contents và images riêng giúp giảm dữ liệu truy xuất khi không cần load hết bài báo.
-contents: lưu nội dung tác giả viết được tách thành từng đoạn nhỏ.
-Chia thành nhiều đoạn nhỏ để có thể mở rộng về sau, giúp thêm chức năng thêm ảnh vào giữa 2 đoạn trong bài báo.
+Việc có contents và images riêng giúp giảm dữ liệu truy xuất khi không cần load hết bài báo.  
+contents: lưu nội dung tác giả viết được tách thành từng đoạn nhỏ.  
+Chia thành nhiều đoạn nhỏ để có thể mở rộng về sau, giúp thêm chức năng thêm ảnh vào giữa 2 đoạn trong bài báo.  
 images: lưu danh sách url của ảnh có trong bài báo
