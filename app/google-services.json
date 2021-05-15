@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "608371209614",
+    "project_id": "vnexpress-d4c76",
+    "storage_bucket": "vnexpress-d4c76.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:608371209614:android:154be37bc412ad6699e0df",
+        "android_client_info": {
+          "package_name": "com.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "608371209614-1mspdjqkjutk2ls0kdaot2mrefseu0s3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD46v9QTVp6a1tYj9o3vN-nz_7d3A5BbW0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "608371209614-1mspdjqkjutk2ls0kdaot2mrefseu0s3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="height_toolbar">50dp</dimen>
+    <dimen name="toolbar_icon_width">50dp</dimen>
+    <dimen name="linespace_paragraph">5dp</dimen>
+</resources>

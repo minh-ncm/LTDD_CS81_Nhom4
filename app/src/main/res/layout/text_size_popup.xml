@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/text_size_window"
+    android:orientation="horizontal"
+    android:background="@color/merlin">
+
+    <ImageView
+        android:id="@+id/text_size_extra_small"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="10dp"
+        android:src="@drawable/outline_format_size_white_24"
+        android:onClick="onClickChangeTextExtraSmall"/>
+
+    <ImageView
+        android:id="@+id/text_size_small"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="8dp"
+        android:src="@drawable/outline_format_size_white_24"
+        android:onClick="onClickChangeTextSmall"/>
+
+    <ImageView
+        android:id="@+id/text_size_regular"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="6dp"
+        android:src="@drawable/outline_format_size_white_24"
+        android:onClick="onClickChangeTextRegular"/>
+
+    <ImageView
+        android:id="@+id/text_size_large"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="4dp"
+        android:src="@drawable/outline_format_size_white_24"
+        android:onClick="onClickChangeTextLarge"/>
+
+    <ImageView
+        android:id="@+id/text_size_extra_large"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingVertical="2dp"
+        android:src="@drawable/outline_format_size_white_24"
+        android:onClick="onClickChangeTextExtraLarge"/>
+
+</LinearLayout>

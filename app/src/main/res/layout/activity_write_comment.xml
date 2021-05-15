@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WriteCommentActivity"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_full_news"
+    android:background="@color/dutch_white">
+
+    <EditText
+        android:id="@+id/commentContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|start"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:fontFamily="@font/open_sans"
+        android:inputType="text"
+        android:textColor="@color/eerie_black"
+        android:textCursorDrawable="@drawable/edittext_cursor"
+        android:backgroundTint="@color/nandor"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_rounded"
+        android:theme="@style/Theme.News"
+        android:text="confirm"
+        android:onClick="onClickWriteCommentToDatabase"/>
+
+</LinearLayout>
