@@ -13,12 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.News">
 
-        <activity android:name=".WriteCommentActivity"></activity>
+        <activity android:name=".WriteCommentActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity
             android:name=".FullNewsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".BackendTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
