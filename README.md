@@ -1,23 +1,25 @@
 # About
 An news reading android app created for my class homework project. <br>
-Min api is 26 but Recommend level 30. <br> 
+Min api is 26 but recommend level 30. <br> 
 
 # Credits
-- Login, logout, register activity by [Nguyễn Hữu Duy Lâm](https://github.com/Lam12050504)
-- Home pages by [Nguyễn Thành Trung](https://github.com/trung11112)
-- Full article content page by [Nguyễn Công Minh](https://github.com/u3Vi) and 
+- Login, logout, register activity by [Nguyễn Hữu Duy Lâm](https://github.com/Lam12050504) and
+[Ngô Cao Sang](https://github.com/sangnggo)
+- Homepage by [Nguyễn Thành Trung](https://github.com/trung11112)
+- Full article contents page by [Nguyễn Công Minh](https://github.com/u3Vi) and 
 [Nguyễn Bá Toàn](https://github.com/zzztoanthang)
 - Backend by [Nguyễn Công Minh](https://github.com/u3Vi)
 
-# Target
+# Targets
+__Notes:__ some of the uncheck target still has code in the project but hasn't been merged. 
 ## Login, logout, register activity
 - [ ] Register new user's account.
 - [ ] Logout current active account.
 - [ ] Login existing account in database.
-## Home pages
+## Homepage
 - [ ] Display list of newest article's preview on homepage.
-- [ ] Create windows to display article's preview of some category.
-## Full article content page
+- [ ] Create windows to display article's preview of some categories.
+## Full article contents page
 - [x] Display a full article from our database.
 - [x] Recommended article has same category with the one user is reading.
 - [x] In each article registered user can leave critics or their thought to the comment section.
