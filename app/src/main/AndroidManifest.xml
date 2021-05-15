@@ -11,9 +11,11 @@
         android:roundIcon="@drawable/ic_newspaper_solid"
         android:supportsRtl="true"
         android:theme="@style/Theme.News">
+
         <activity
             android:name=".FullNewsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+
         <activity android:name=".BackendTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,8 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".MainActivity"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".WriteCommentActivity"/>
+        <activity android:name=".LoginActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

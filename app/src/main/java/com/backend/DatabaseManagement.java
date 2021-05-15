@@ -79,7 +79,11 @@ public class DatabaseManagement {
         /*
         Example:
         DatabaseManagement databaseManagement = new DatabaseManagement();
+<<<<<<< HEAD
         databaseManagement.getLatestPreview(new DatabaseManagement.newsListPreviewsCallback() {
+=======
+        databaseManagement.getLatestPreviews(new DatabaseManagement.newsListPreviewsCallback() {
+>>>>>>> 767fb7dbe5196d6d14a109b935f8aa2fbd8fc62a
                     @Override
                     public void onCallback(List<NewsPreview> list) {
                         // Do processing here
