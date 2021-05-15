@@ -1,12 +1,12 @@
 # Simple visualization
-Below is the structure of data save in firestore:
+Below is the structure of data save in firestore:  
 
-root
-|_user
-|_news
-|   |_contents
-|   |_images
-|_comments
+root  
+|_user  
+|_news  
+|   |_contents  
+|   |_images  
+|_comments  
 
 ## comments's attributes:
 - authorUsername: author's username of the article in which comment is written.
