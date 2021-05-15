@@ -1,7 +1,8 @@
 # About
 An news reading android app created for my class homework project. <br>
 Min api is 26 but recommend level 30. <br> 
-More documents can be found in this directory under _documents_ or _documents_vn_ for vietnamese. <br>
+More documents can be found in this directory under [documents](https://github.com/u3Vi/LTDD_CS81_Nhom4/tree/main/document) 
+or [documents_vn](https://github.com/u3Vi/LTDD_CS81_Nhom4/tree/main/document_vn) for vietnamese.  
 
 # Credits
 - Login, logout, register activity by [Nguyễn Hữu Duy Lâm](https://github.com/Lam12050504) and
