@@ -2,10 +2,10 @@
 Below is the structure of data save in firestore:  
 
 root  
-|_user  
-|_news  
-|   |_contents  
-|   |_images  
+|__user  
+|__news  
+|          |__contents  
+|          |__images  
 |_comments  
 
 ## comments's attributes:

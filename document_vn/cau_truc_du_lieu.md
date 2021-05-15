@@ -2,10 +2,10 @@
 Dưới đây là các collections được lưu trong firestore:  
 
 root    
-|_user  
-|_news  
-|   |_contents  
-|   |_images  
+|__user  
+|__news  
+|           |__contents  
+|           |__images  
 |_comments  
 
 ## Trong comments gồm các thuộc tính:
