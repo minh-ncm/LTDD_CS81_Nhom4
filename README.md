@@ -1,6 +1,7 @@
 # About
 An news reading android app created for my class homework project. <br>
 Min api is 26 but recommend level 30. <br> 
+More documents can be found in this directory under _documents_ or _documents_vn_ for vietnamese. <br>
 
 # Credits
 - Login, logout, register activity by [Nguyễn Hữu Duy Lâm](https://github.com/Lam12050504) and
@@ -48,18 +49,3 @@ Load image from url by [picasso](https://github.com/square/picasso) <br>
 
 ## Icons packs
 Icons pack from [fontawesome](https://fontawesome.com/) <br>  
-
-## Demo
-
-https://user-images.githubusercontent.com/50707556/118353269-b6fe4500-b58f-11eb-84cd-cac9abb3e0f8.mp4
-
-https://user-images.githubusercontent.com/50707556/118353390-2bd17f00-b590-11eb-9882-df5314106825.mp4
-
-https://user-images.githubusercontent.com/50707556/118353396-312ec980-b590-11eb-9689-9bf396f93cb4.mp4
-
-https://user-images.githubusercontent.com/50707556/118353398-355ae700-b590-11eb-924c-79431bad86dc.mp4
-
-
-
-
-
